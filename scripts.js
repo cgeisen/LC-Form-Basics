@@ -51,6 +51,9 @@ function init() {
     let create = document.getElementById("create");
     let newEntry = document.getElementById("new-entry");
     let form = document.getElementById("form");
+    let goToForm = document.getElementById("go-to-form");
+    let submit = document.getElementById("submit");
+    let cancel = document.getElementById("cancel");
 
     function addNewEntry() {
         // Store data
@@ -80,12 +83,24 @@ function init() {
 
     // go-to-form button
     //  - Hide container of go-to-form
-    //  - Show container of add and cancel buttons
+    //  - Show container of add and cancel buttons - new-entry section
+    
+    goToForm.addEventListener("click", function(event){
+        event.preventDefault();
+        create.style.visibility = "hidden";
+        newEntry.style.visibility = "visible";
+    });
 
 
     // cancel button
     //  - Show container of go-to-form
     //  - Hide container of add and cancel
+
+    cancel.addEventListener("click", function(event){
+        event.preventDefault();
+        newEntry.style.visibility = "hidden";
+        create.style.visibility = "visible";
+    });
 
 
 
@@ -95,5 +110,19 @@ function init() {
     //  - Call clearForm()
     //  - Show container of go-to-form
     //  - Hide container of add and cancel
+
+    submit.addEventListener("click", function(event){
+        event.preventDefault();
+
+        if (day.value === "" || category.value === "" || activity.value === ""){
+            alert("fill out all fields");
+            clearForm();
+        } else {
+            addNewEntry();
+            clearForm();
+            create.style.visibility = "visible";
+            newEntry.style.visibility = "hidden";
+        }
+    });
 
 }
